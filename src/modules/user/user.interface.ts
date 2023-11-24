@@ -1,13 +1,13 @@
-type FullName = {
+interface FullName {
   firstName: string;
   lastName: string;
-};
+}
 
-type Address = {
+interface Address {
   street: string;
   city: string;
   country: string;
-};
+}
 
 type Order = [
   {

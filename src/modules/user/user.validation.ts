@@ -21,7 +21,7 @@ export const userSchemaValidation = z.object({
   userId: z.number(),
   username: z.string(),
   fullName: fullNameSchemaValidation,
-  age: z.string(),
+  age: z.number(),
   email: z.string(),
   password: z.string(),
   isActive: z.boolean(),
