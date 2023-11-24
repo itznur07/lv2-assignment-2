@@ -45,7 +45,6 @@ const userSchema = new Schema<User>({
     required: [true, 'IsActive is required!'],
     trim: true,
   },
-
   hobbies: { type: [String], required: [true, 'Hobbies is required!'] },
   address: {
     street: { type: String, required: [true, 'Street is required!'] },
