@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
+import config from '../../app/config';
 import { User } from './user.interface';
 
 const userSchema = new Schema<User>({
@@ -65,6 +67,22 @@ const userSchema = new Schema<User>({
       quantity: { type: Number, required: true },
     },
   ],
+});
+
+// use middleware
+
+userSchema.pre('save', async function (next) {
+  const student = this;
+  student.password = await bcrypt.hash(
+    student.password,
+    Number(config.bcrypt_salt_round),
+  );
+  next();
+});
+
+userSchema.post('save', function (doc, next) {
+  doc.password = '';
+  next();
 });
 
 export const UserModel = model<User>('Users', userSchema);
