@@ -11,8 +11,17 @@ const getAllUserToDB = async () => {
   return result;
 };
 
-const getOneUserToDB = async (userId: string) => {
-  const result = await UserModel.findOne({ id: userId });
+const getOneUserToDB = async (userId: number) => {
+  const result = await UserModel.findOne({ userId: userId });
+  return result;
+};
+
+const updateOneUserToDB = async (userId: number, userData: User) => {
+  const result = await UserModel.updateOne(
+    { userId: userId },
+    { $set: userData },
+  );
+
   return result;
 };
 
@@ -20,4 +29,5 @@ export const userServices = {
   createUserToDB,
   getAllUserToDB,
   getOneUserToDB,
+  updateOneUserToDB,
 };

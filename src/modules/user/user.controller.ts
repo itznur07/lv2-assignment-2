@@ -46,9 +46,30 @@ const getAllUser = async (req: Request, res: Response) => {
 
 const getOneUser = async (req: Request, res: Response) => {
   try {
-    const userId = req.params.id;
+    const { userId } = req.params;
 
     const result = await userServices.getOneUserToDB(userId);
+
+    res.status(200).json({
+      success: true,
+      message: 'user get successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong!',
+      error: error || error.message,
+    });
+  }
+};
+
+const updateOneUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const userData: User = req.body;
+
+    const result = await userServices.updateOneUserToDB(userId, userData);
 
     res.status(200).json({
       success: true,
@@ -68,4 +89,5 @@ export const userController = {
   createUser,
   getAllUser,
   getOneUser,
+  updateOneUser,
 };
