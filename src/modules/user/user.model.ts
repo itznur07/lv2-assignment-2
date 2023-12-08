@@ -61,10 +61,8 @@ const userSchema = new Schema<User>({
     {
       productName: {
         type: String,
-        required: [true, 'Product Name is required!'],
       },
-      price: { type: Number, required: [true, 'Price is required!'] },
-      quantity: { type: Number, required: true },
+      price: { type: Number },
     },
   ],
 });

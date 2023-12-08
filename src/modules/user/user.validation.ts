@@ -27,5 +27,5 @@ export const userSchemaValidation = z.object({
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: addressSchemaValidation,
-  orders: z.array(orderSchemaValidation),
+  orders: z.array(orderSchemaValidation).optional(),
 });
