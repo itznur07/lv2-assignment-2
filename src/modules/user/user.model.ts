@@ -57,14 +57,14 @@ const userSchema = new Schema<User>({
       trim: true,
     },
   },
-  orders: [
-    {
-      productName: {
-        type: String,
-      },
-      price: { type: Number },
-    },
-  ],
+  // orders: [
+  //   {
+  //     productName: {
+  //       type: String,
+  //     },
+  //     price: { type: Number },
+  //   },
+  // ],
 });
 
 // use middleware

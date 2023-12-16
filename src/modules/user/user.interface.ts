@@ -9,13 +9,13 @@ interface Address {
   country: string;
 }
 
-type Order = [
-  {
-    productName: string;
-    price: number;
-    quantity: number;
-  },
-];
+// type Order = [
+//   {
+//     productName: string;
+//     price: number;
+//     quantity: number;
+//   },
+// ];
 
 export interface User {
   userId: number;
@@ -27,5 +27,5 @@ export interface User {
   isActive: boolean;
   hobbies: string[];
   address: Address;
-  orders?: Order;
+  // orders?: Order;
 }
