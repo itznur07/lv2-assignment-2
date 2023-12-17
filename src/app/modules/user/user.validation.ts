@@ -11,13 +11,24 @@ const addressSchemaValidation = z.object({
   country: z.string(),
 });
 
+const updateFullNameSchemaValidation = z.object({
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+});
+
+const updateAddressSchemaValidation = z.object({
+  street: z.string().optional(),
+  city: z.string().optional(),
+  country: z.string().optional(),
+});
+
 // const orderSchemaValidation = z.object({
 //   productName: z.string(),
 //   price: z.number(),
 //   quantity: z.number(),
 // });
 
-export const userSchemaValidation = z.object({
+const createUserSchemaValidation = z.object({
   userId: z.number(),
   username: z.string(),
   fullName: fullNameSchemaValidation,
@@ -29,3 +40,21 @@ export const userSchemaValidation = z.object({
   address: addressSchemaValidation,
   // orders: z.array(orderSchemaValidation).optional(),
 });
+
+const updateUserSchemaValidation = z.object({
+  userId: z.number().optional(),
+  username: z.string().optional(),
+  fullName: updateFullNameSchemaValidation,
+  age: z.number().optional(),
+  email: z.string().optional(),
+  password: z.string().optional(),
+  isActive: z.boolean().optional(),
+  hobbies: z.array(z.string()).optional(),
+  address: updateAddressSchemaValidation,
+  // orders: z.array(orderSchemaValidation).optional(),
+});
+
+export const validateUserSchema = {
+  createUserSchemaValidation,
+  updateUserSchemaValidation,
+};

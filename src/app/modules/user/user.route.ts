@@ -1,11 +1,21 @@
 import express, { Router } from 'express';
+import validateRequest from '../../middleware/validateRequest';
 import { userController } from './user.controller';
+import { validateUserSchema } from './user.validation';
 const router: Router = express.Router();
 
-router.post('/', userController.createUser);
+router.post(
+  '/',
+  validateRequest(validateUserSchema.createUserSchemaValidation),
+  userController.createUser,
+);
 router.get('/', userController.getAllUser);
 router.get('/:userId', userController.getOneUser);
-router.put('/:userId', userController.updateOneUser);
+router.put(
+  '/:userId',
+  validateRequest(validateUserSchema.updateUserSchemaValidation),
+  userController.updateOneUser,
+);
 router.delete('/:userId', userController.deleteOneUser);
 
 export const userRouter = router;

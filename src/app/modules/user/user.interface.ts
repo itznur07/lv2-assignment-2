@@ -1,9 +1,9 @@
-interface FullName {
+interface TFullName {
   firstName: string;
   lastName: string;
 }
 
-interface Address {
+interface TAddress {
   street: string;
   city: string;
   country: string;
@@ -17,15 +17,15 @@ interface Address {
 //   },
 // ];
 
-export interface User {
+export interface TUser {
   userId: number;
   username: string;
   password: string;
-  fullName: FullName;
+  fullName: TFullName;
   age: number;
   email: string;
   isActive: boolean;
   hobbies: string[];
-  address: Address;
+  address: TAddress;
   // orders?: Order;
 }

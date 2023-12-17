@@ -1,24 +1,19 @@
 import { Request, Response } from 'express';
-import { User } from './user.interface';
+import httpStatus from 'http-status';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { TUser } from './user.interface';
 import { userServices } from './user.service';
 
-const createUser = async (req: Request, res: Response) => {
-  try {
-    const result = await userServices.createUserToDB(req.body);
-
-    res.status(200).json({
-      success: true,
-      message: 'user created successfully!',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'something went wrong!',
-      error: error || error.message,
-    });
-  }
-};
+const createUser = catchAsync(async (req, res) => {
+  const result = await userServices.createUserToDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: 'User created successfully!',
+    data: result,
+  });
+});
 
 const getAllUser = async (req: Request, res: Response) => {
   try {
@@ -61,7 +56,7 @@ const getOneUser = async (req: Request, res: Response) => {
 const updateOneUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const userData: User = req.body;
+    const userData: TUser = req.body;
 
     const result = await userServices.updateOneUserToDB(userId, userData);
 

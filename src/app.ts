@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
+import globalErrorHandler from './app/middleware/globalErrorHandler';
 import { userRouter } from './app/modules/user/user.route';
 
 const app: Application = express();
@@ -12,5 +13,8 @@ app.use('/api/users', userRouter);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World');
 });
+
+// add global error handler
+app.use(globalErrorHandler);
 
 export default app;
