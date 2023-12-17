@@ -26,70 +26,52 @@ const getAllUser = catchAsync(async (req, res) => {
   });
 });
 
-const getOneUser = async (req: Request, res: Response) => {
-  try {
-    const { userId } = req.params;
+const getUser = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.params;
 
-    const result = await userServices.getOneUserToDB(userId);
+  const result = await userServices.getUserToDB(userId);
 
-    res.status(200).json({
-      success: true,
-      message: 'user get successfully!',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'something went wrong!',
-      error: error || error.message,
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User fetched successfully!',
+    data: result,
+  });
+});
 
-const updateOneUser = async (req: Request, res: Response) => {
-  try {
-    const { userId } = req.params;
-    const userData: TUser = req.body;
+const updateOneUser = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const userData: Partial<TUser> = req.body;
 
-    const result = await userServices.updateOneUserToDB(userId, userData);
+  const result = await userServices.updateOneUserToDB(
+    userId,
+    userData as TUser,
+  );
 
-    res.status(200).json({
-      success: true,
-      message: 'user updated  successfully!',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'something went wrong!',
-      error: error || error.message,
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User updated successfully!',
+    data: result,
+  });
+});
 
-const deleteOneUser = async (req: Request, res: Response) => {
-  try {
-    const { userId } = req.params;
-    const result = await userServices.deleteOneUserToDB(userId);
+const deleteOneUser = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const result = await userServices.deleteOneUserToDB(userId);
 
-    res.status(200).json({
-      success: true,
-      message: 'user deleted successfully!',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'something went wrong!',
-      error: error || error.message,
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User deleted successfully!',
+    data: result,
+  });
+});
 
 export const userController = {
   createUser,
   getAllUser,
-  getOneUser,
+  getUser,
   updateOneUser,
   deleteOneUser,
 };

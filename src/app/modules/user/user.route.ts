@@ -12,12 +12,13 @@ router.post(
 
 router.get('/users', userController.getAllUser);
 
-router.get('/:userId', userController.getOneUser);
+router.get('/users/:userId', userController.getUser);
+
 router.put(
-  '/:userId',
+  '/users/:userId',
   validateRequest(validateUserSchema.updateUserSchemaValidation),
   userController.updateOneUser,
 );
-router.delete('/:userId', userController.deleteOneUser);
+router.delete('/users/:userId', userController.deleteOneUser);
 
 export const userRouter = router;

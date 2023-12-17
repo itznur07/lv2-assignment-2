@@ -11,16 +11,20 @@ const addressSchemaValidation = z.object({
   country: z.string(),
 });
 
-const updateFullNameSchemaValidation = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-});
+const updateFullNameSchemaValidation = z
+  .object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+  })
+  .optional();
 
-const updateAddressSchemaValidation = z.object({
-  street: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-});
+const updateAddressSchemaValidation = z
+  .object({
+    street: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+  })
+  .optional();
 
 // const orderSchemaValidation = z.object({
 //   productName: z.string(),

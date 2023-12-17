@@ -13,12 +13,27 @@ const getAllUserToDB = async () => {
   return result;
 };
 
-const getOneUserToDB = async (userId: string | number) => {
-  const result = await UserModel.findOne({ userId: userId });
+const getUserToDB = async (userId: string | number) => {
+  // find data exist or not
+  const isExist = await UserModel.findOne({ userId: userId });
+
+  if (!isExist) {
+    throw new Error('This user is not exist!');
+  }
+
+  const result = await UserModel.findOne({ userId: userId }).select(
+    '-password -_id',
+  );
   return result;
 };
 
 const updateOneUserToDB = async (userId: string | number, userData: TUser) => {
+  const isExist = await UserModel.findOne({ userId: userId });
+
+  if (!isExist) {
+    throw new Error('This user is not exists');
+  }
+
   const result = await UserModel.findOneAndUpdate(
     {
       userId: userId,
@@ -29,7 +44,13 @@ const updateOneUserToDB = async (userId: string | number, userData: TUser) => {
   return result;
 };
 
-const deleteOneUserToDB = async (userId: number) => {
+const deleteOneUserToDB = async (userId: string | number) => {
+  const isExist = await UserModel.findOne({ userId: userId });
+
+  if (!isExist) {
+    throw new Error('this user is not exist!');
+  }
+
   const result = await UserModel.deleteOne({ userId: userId });
   return result;
 };
@@ -37,7 +58,7 @@ const deleteOneUserToDB = async (userId: number) => {
 export const userServices = {
   createUserToDB,
   getAllUserToDB,
-  getOneUserToDB,
+  getUserToDB,
   updateOneUserToDB,
   deleteOneUserToDB,
 };
