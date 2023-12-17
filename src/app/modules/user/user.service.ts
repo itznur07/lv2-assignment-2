@@ -51,7 +51,7 @@ const deleteOneUserToDB = async (userId: string | number) => {
     throw new Error('this user is not exist!');
   }
 
-  const result = await UserModel.deleteOne({ userId: userId });
+  const result = await UserModel.findOneAndDelete({ userId: userId });
   return result;
 };
 
