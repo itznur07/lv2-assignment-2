@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
@@ -26,7 +25,7 @@ const getAllUser = catchAsync(async (req, res) => {
   });
 });
 
-const getUser = catchAsync(async (req: Request, res: Response) => {
+const getUser = catchAsync(async (req, res) => {
   const { userId } = req.params;
 
   const result = await userServices.getUserToDB(userId);
@@ -56,7 +55,7 @@ const updateOneUser = catchAsync(async (req, res) => {
   });
 });
 
-const deleteOneUser = catchAsync(async (req: Request, res: Response) => {
+const deleteOneUser = catchAsync(async (req, res) => {
   const { userId } = req.params;
   const result = await userServices.deleteOneUserToDB(userId);
 
@@ -68,10 +67,24 @@ const deleteOneUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createOrder = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+
+  const result = await userServices.createOrderToDB(userId, req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order created successfully!',
+    data: result,
+  });
+});
+
 export const userController = {
   createUser,
   getAllUser,
   getUser,
   updateOneUser,
   deleteOneUser,
+  createOrder,
 };

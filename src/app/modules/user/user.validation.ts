@@ -26,11 +26,13 @@ const updateAddressSchemaValidation = z
   })
   .optional();
 
-// const orderSchemaValidation = z.object({
-//   productName: z.string(),
-//   price: z.number(),
-//   quantity: z.number(),
-// });
+const orderSchemaValidation = z
+  .object({
+    productName: z.string().optional(),
+    price: z.number().optional(),
+    quantity: z.number().optional(),
+  })
+  .optional();
 
 const createUserSchemaValidation = z.object({
   body: z.object({
@@ -43,7 +45,7 @@ const createUserSchemaValidation = z.object({
     isActive: z.boolean(),
     hobbies: z.array(z.string()),
     address: addressSchemaValidation,
-    // orders: z.array(orderSchemaValidation).optional(),
+    orders: orderSchemaValidation.optional(),
   }),
 });
 
@@ -58,11 +60,12 @@ const updateUserSchemaValidation = z.object({
     isActive: z.boolean().optional(),
     hobbies: z.array(z.string()).optional(),
     address: updateAddressSchemaValidation,
-    // orders: z.array(orderSchemaValidation).optional(),
+    orders: orderSchemaValidation.optional(),
   }),
 });
 
 export const validateUserSchema = {
   createUserSchemaValidation,
   updateUserSchemaValidation,
+  orderSchemaValidation,
 };

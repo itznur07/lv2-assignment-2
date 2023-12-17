@@ -2,7 +2,15 @@ import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 
 import config from '../../config';
-import { TUser } from './user.interface';
+import { TOrder, TUser } from './user.interface';
+
+const orderSchema = new Schema<TOrder>([
+  {
+    productName: { type: String },
+    price: { type: Number },
+    quantity: { type: Number },
+  },
+]);
 
 const userSchema = new Schema<TUser>(
   {
@@ -59,14 +67,7 @@ const userSchema = new Schema<TUser>(
         trim: true,
       },
     },
-    // orders: [
-    //   {
-    //     productName: {
-    //       type: String,
-    //     },
-    //     price: { type: Number },
-    //   },
-    // ],
+    orders: [orderSchema],
   },
   {
     versionKey: false,

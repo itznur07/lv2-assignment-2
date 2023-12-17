@@ -9,7 +9,7 @@ interface TAddress {
   country: string;
 }
 
-type Order = [
+export type TOrder = [
   {
     productName?: string;
     price?: number;
@@ -27,5 +27,5 @@ export interface TUser {
   isActive: boolean;
   hobbies: string[];
   address: TAddress;
-  orders?: Order;
+  orders?: TOrder;
 }

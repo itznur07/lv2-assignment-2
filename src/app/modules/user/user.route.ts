@@ -21,4 +21,6 @@ router.put(
 );
 router.delete('/users/:userId', userController.deleteOneUser);
 
+router.put('/users/:userId/orders', userController.createOrder);
+
 export const userRouter = router;
