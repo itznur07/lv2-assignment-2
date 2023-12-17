@@ -15,23 +15,16 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
-const getAllUser = async (req: Request, res: Response) => {
-  try {
-    const result = await userServices.getAllUserToDB();
+const getAllUser = catchAsync(async (req, res) => {
+  const result = await userServices.getAllUserToDB();
 
-    res.status(200).json({
-      success: true,
-      message: 'get all user successfully!',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'something went wrong!',
-      error: error || error.message,
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users fetched successfully!',
+    data: result,
+  });
+});
 
 const getOneUser = async (req: Request, res: Response) => {
   try {

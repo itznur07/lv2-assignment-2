@@ -29,29 +29,33 @@ const updateAddressSchemaValidation = z.object({
 // });
 
 const createUserSchemaValidation = z.object({
-  userId: z.number(),
-  username: z.string(),
-  fullName: fullNameSchemaValidation,
-  age: z.number(),
-  email: z.string(),
-  password: z.string(),
-  isActive: z.boolean(),
-  hobbies: z.array(z.string()),
-  address: addressSchemaValidation,
-  // orders: z.array(orderSchemaValidation).optional(),
+  body: z.object({
+    userId: z.number(),
+    username: z.string(),
+    fullName: fullNameSchemaValidation,
+    age: z.number(),
+    email: z.string(),
+    password: z.string(),
+    isActive: z.boolean(),
+    hobbies: z.array(z.string()),
+    address: addressSchemaValidation,
+    // orders: z.array(orderSchemaValidation).optional(),
+  }),
 });
 
 const updateUserSchemaValidation = z.object({
-  userId: z.number().optional(),
-  username: z.string().optional(),
-  fullName: updateFullNameSchemaValidation,
-  age: z.number().optional(),
-  email: z.string().optional(),
-  password: z.string().optional(),
-  isActive: z.boolean().optional(),
-  hobbies: z.array(z.string()).optional(),
-  address: updateAddressSchemaValidation,
-  // orders: z.array(orderSchemaValidation).optional(),
+  body: z.object({
+    userId: z.number().optional(),
+    username: z.string().optional(),
+    fullName: updateFullNameSchemaValidation,
+    age: z.number().optional(),
+    email: z.string().optional(),
+    password: z.string().optional(),
+    isActive: z.boolean().optional(),
+    hobbies: z.array(z.string()).optional(),
+    address: updateAddressSchemaValidation,
+    // orders: z.array(orderSchemaValidation).optional(),
+  }),
 });
 
 export const validateUserSchema = {

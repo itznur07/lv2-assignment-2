@@ -7,7 +7,9 @@ const createUserToDB = async (user: TUser) => {
 };
 
 const getAllUserToDB = async () => {
-  const result = await UserModel.find();
+  const result = await UserModel.find().select(
+    '-hobbies -isActive -password -userId -_id',
+  );
   return result;
 };
 
