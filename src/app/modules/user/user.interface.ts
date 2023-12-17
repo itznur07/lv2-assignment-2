@@ -9,13 +9,13 @@ interface TAddress {
   country: string;
 }
 
-// type Order = [
-//   {
-//     productName: string;
-//     price: number;
-//     quantity: number;
-//   },
-// ];
+type Order = [
+  {
+    productName?: string;
+    price?: number;
+    quantity?: number;
+  },
+];
 
 export interface TUser {
   userId: number;
@@ -27,5 +27,5 @@ export interface TUser {
   isActive: boolean;
   hobbies: string[];
   address: TAddress;
-  // orders?: Order;
+  orders?: Order;
 }
