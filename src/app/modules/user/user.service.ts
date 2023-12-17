@@ -11,12 +11,12 @@ const getAllUserToDB = async () => {
   return result;
 };
 
-const getOneUserToDB = async (userId: number) => {
+const getOneUserToDB = async (userId: string | number) => {
   const result = await UserModel.findOne({ userId: userId });
   return result;
 };
 
-const updateOneUserToDB = async (userId: number, userData: User) => {
+const updateOneUserToDB = async (userId: string | number, userData: User) => {
   const result = await UserModel.updateOne(
     { userId: userId },
     { $set: userData },
